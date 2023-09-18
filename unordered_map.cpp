@@ -1,8 +1,8 @@
 #include <iostream>
-#include <unordered_map>
 #include <valarray>
 #include <cassert>
-#include <cstdlib>
+#include <algorithm>
+#include <string>
 
 #define XORRAND 3183507249
 
@@ -10,7 +10,6 @@ using std::unordered_map;
 using std::function;
 using std::cin;
 using std::cout;
-
 
 template<typename K, typename V>//what's the difference between class and typename
 class abstract_data_t {
@@ -27,13 +26,9 @@ private:
         SpecialNode *left;
         SpecialNode *right;
 
-        explicit SpecialNode(const K k, V v, size_t h) 
-                : m_key(k)
-                ,m_value(v)
-                ,m_hash(h)
-                ,next(nullptr)
-                ,left(nullptr)
-                ,right(nullptr){}
+        explicit SpecialNode(const K k, V v, size_t h)
+                : m_key(k),m_value(v),m_hash(h),next(nullptr),left(nullptr),right(nullptr){
+        }
     };
 
     SpecialNode **hashArray;
@@ -118,16 +113,22 @@ public:
         return true;
     };
 
-    static bool is_equal(const abstract_data_t &object, const abstract_data_t &target) {};
+    static bool is_equal(const abstract_data_t &object, const abstract_data_t &target) {};// ???
 
-    void assign(size_t amount, int repl) {};
+    void assign(size_t amount, int repl) {};// ???
 
     bool empty() {
         if (listOfNodes) return false;
         return true;
     };
 
-    void swap(const abstract_data_t &other) {};
+    //swaping containers' content
+    void swap(abstract_data_t &other) {
+        std::swap(m_capacity,other.m_capacity);
+        std::swap(size,other.size);
+        std::swap(hashArray,other.hashArray);
+        std::swap(listOfNodes,other.listOfNodes);
+    };
 
     //search by the key
     V at(const K &key) {
