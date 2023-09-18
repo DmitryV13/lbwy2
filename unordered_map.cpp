@@ -10,6 +10,7 @@ using std::unordered_map;
 using std::function;
 using std::cin;
 using std::cout;
+using std::string;
 
 template<typename K, typename V>//what's the difference between class and typename
 class abstract_data_t {
@@ -84,14 +85,20 @@ public:
         size = 0;
     };
 
-    size_t hashEvaluate(K key) {
+    size_t hashEvaluate(const int key) {
         size_t result = floor(((int) sqrt(key) ^ XORRAND) * (10 - M_PI / (key / 2 + key)));
         if (result > 10000) {
             std::string numberStr = std::to_string(result);
             int del = (numberStr[5] + numberStr[4]) * 10 + (numberStr[4] + numberStr[1]);
-            result = floor(result * del);
+            result = floor((double)result * del);
         }
         return result;
+    };
+
+    size_t hashEvaluate(const string key) {
+        size_t result=0;
+        for (char i : key) result+=i;
+        return ((int)pow(result,2)) ^ XORRAND;
     };
 
     //insert value in map by the key
@@ -122,7 +129,7 @@ public:
         return true;
     };
 
-    //swaping containers' content
+    //swap containers' content
     void swap(abstract_data_t &other) {
         std::swap(m_capacity,other.m_capacity);
         std::swap(size,other.size);
