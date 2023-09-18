@@ -27,8 +27,13 @@ private:
         SpecialNode *left;
         SpecialNode *right;
 
-        explicit SpecialNode(const K k, V v, size_t h) : m_key(k),m_value(v),m_hash(h),
-                                                        next(nullptr),left(nullptr),right(nullptr){}
+        explicit SpecialNode(const K k, V v, size_t h) 
+                : m_key(k)
+                ,m_value(v)
+                ,m_hash(h)
+                ,next(nullptr)
+                ,left(nullptr)
+                ,right(nullptr){}
     };
 
     SpecialNode **hashArray;
