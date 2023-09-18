@@ -78,7 +78,7 @@ public:
                 hashArray[i] = nullptr;
             }
         }
-        delete hashArray;
+        delete []hashArray;
         hashArray = nullptr;
         m_capacity = 0;
         size = 0;
@@ -215,7 +215,7 @@ public:
         }
         listOfNodes = newListOfNodes;
         m_capacity = mem;
-        delete hashArray;
+        delete []hashArray;
         hashArray = newHashArray;
     };
 
