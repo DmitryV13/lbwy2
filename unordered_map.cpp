@@ -15,8 +15,8 @@ using std::cout;
 template<typename K, typename V>//what's the difference between class and typename
 class abstract_data_t {
 private:
-    int m_capacity;
     int size;
+    int m_capacity;
     const int load_factor = 1;
 
     struct SpecialNode {
@@ -40,40 +40,23 @@ private:
     SpecialNode **hashArray;
     SpecialNode *listOfNodes;
 public:
-    //abstract_data_t() : size(0), m_capacity(10), hashArray(nullptr), listOfNodes(nullptr) {};//what's the difference
-    abstract_data_t() {
-        size = 0;
-        m_capacity = 10;
-        hashArray = nullptr;
+    abstract_data_t() : size(0), m_capacity(10), hashArray(nullptr), listOfNodes(nullptr) {
         haresize(m_capacity);
-        listOfNodes = nullptr;
     };
 
-    abstract_data_t(int capacity) {
-        size = 0;
-        m_capacity = capacity;
-        hashArray = nullptr;
+    abstract_data_t(int capacity) : size(0), m_capacity(capacity), hashArray(nullptr), listOfNodes(nullptr) {
         haresize(m_capacity);
-        listOfNodes = nullptr;
     };
 
-    abstract_data_t(const int arr[], int length) {
-        size = 0;
-        m_capacity = 0;
-        hashArray = nullptr;
-        haresize(length + 2);//*2
-        listOfNodes = nullptr;
+    abstract_data_t(const int arr[], int length) : size(0), m_capacity(length*2), hashArray(nullptr), listOfNodes(nullptr) {
+        haresize(m_capacity);//*2
         for (int i = 0; i < length; ++i) {
             put(i, arr[i]);
         }
     };
 
-    abstract_data_t(const abstract_data_t &initObject) {
-        size = initObject.size;
-        m_capacity = initObject.m_capacity;
-        hashArray = nullptr;
+    abstract_data_t(const abstract_data_t &initObject) : size(initObject.size), m_capacity(initObject.m_capacity), hashArray(nullptr), listOfNodes(nullptr) {
         haresize(m_capacity);
-        listOfNodes = nullptr;
         for (int i = 0; i < m_capacity; i++) hashArray[i]= nullptr;
         SpecialNode** initArray=initObject.hashArray;
         for (int i = m_capacity-1; i >=0; i--) {
